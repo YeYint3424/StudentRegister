@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/signup.css">
+<style>
+   body {
+      overflow-x: hidden;
+   }
+
+   .role {
+      left: 30px;
+   }
+</style>
+<title>User Registration</title>
+</head>
+
+<body class="img js-fullheight" style="background-image: url(images/mac.png);">
+<section class="ftco-section">
+   <div class="container mx-auto" id="cardContainer">
+      <div class="profile col-md-6 mx-auto">
+         <div class="card mb-3 content">
+            <div class="profile-header">
+               <div class="header-content">
+                  <h4 style="color:black">User Registration</h4>
+                  <h6 style="color:red" th:text="${error}"></h6>
+               </div>
+            </div>
+            <form action="/user-signup" method="post" onsubmit="return validateForm()">
+               <div class="card-body" id="body-part" style="width:100%">
+                  <div class="row" style="margin-top:20px;font-size:17px">
+                     <div class="col" style="text-align:right;padding-right:40px;width:50%">
+                        <p style="margin:10px;font-weight:bold" class="left-title">Username</p>
+                     </div>
+                     <div class="col" style="text-align:left;padding-left:40px;width:50%">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter your name.">
+                     </div>
+                  </div>
+                  <!-- Add comments here explaining the input field requirement -->
+                  <div class="row" style="font-size:17px">
+                     <div class="col" style="text-align:right;padding-right:40px">
+                        <p style="margin:10px;font-weight:bold" class="left-title">Email</p>
+                     </div>
+                     <div class="col" style="text-align:left;padding-left:40px;width:50%">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email.">
+                     </div>
+                  </div>
+                  <!-- Add comments here explaining the input field requirement -->
+                  <div class="row" style="font-size:17px">
+                     <div class="col" style="text-align:right;padding-right:40px">
+                        <p style="margin:10px;font-weight:bold" class="left-title">Password</p>
+                     </div>
+                     <div class="col" style="text-align:left;padding-left:40px;width:50%">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Create Password.">
+                     </div>
+                  </div>
+                  <!-- Add comments here explaining the input field requirement -->
+                  <div class="row" style="font-size:17px">
+                     <div class="col" style="text-align:right;padding-right:40px">
+                        <p style="margin:10px;font-weight:bold" class="left-title">Confirm Password</p>
+                     </div>
+                     <div class="col" style="text-align:left;padding-left:40px;width:50%">
+                        <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm Password.">
+                        <small id="passwordMismatchError" style="color: red; display: none;">Password and Confirm-password need to be the same</small>
+                     </div>
+                  </div>
+                  <!-- Add comments here explaining the input field requirement -->
+                  <div class="row" style="font-size:17px">
+                     <div class="col" style="text-align:left;padding-left:40px;width:50%">
+                        <input type="hidden" class="form-control" id="role" name="role" value="user">
+                        <input type="hidden" class="form-control" id="status" name="status" value="1">
+                     </div>
+                  </div>
+                  <div class="card-footer center">
+                  
+                     <button type="button" class="card-btn" onclick="goBack()">
+                     Cancel
+                     </button>
+                     <button type="submit" class="card-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</section>
+<div id="footer" style="color:black; background: #cfd2d6;padding:15px">
+   <span style=" position: relative;left:530px">Copyright &#169; ACE Inspiration 2022</span>
+</div>
+<script>
+   function validateForm() {
+      var username = document.getElementById("username").value;
+      var email = document.getElementById("email").value;
+      var password = document.getElementById("password").value;
+      var cpassword = document.getElementById("cpassword").value;
+
+      // Check if any of the fields are empty
+/*       if (username === "") {
+         alert("All fields are mandatory. Please fill in all the required information.");
+         return false;
+      }
+      else  */
+      if (username === "" || email === "" || password === "" || cpassword === "") {
+         alert("Please fill in all the information.");
+         return false;
+      }
+
+      // Check if passwords match
+      if (password !== cpassword) {
+         document.getElementById("passwordMismatchError").style.display = "block";
+         return false;
+      }
+
+      return true;
+   }
+</script>
+<script>
+    function goBack(){
+        window.history.back();
+    }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
